@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package craftland;
+
+// ==================== Craftland Profile ====================
+
+// معلومات فتحة الخريطة (slot) للاعب
+message CraftlandSlotInfo {
+    uint32 slot_id = 1;                     // رقم الفتحة (1,2,3...)
+    uint32 slot_state = 2;                  // حالة الفتحة (0=فارغة, 1=منشورة)
+    string workshop_code = 3;               // رمز الخريطة الفريد
+    WorkshopBasicInfo workshop_basic_info = 4;  // المعلومات الأساسية للخريطة
+}
+
+// المعلومات الأساسية للخريطة
+message WorkshopBasicInfo {
+    string workshop_name = 1;               // اسم الخريطة
+    string author_id = 2;                  // معرف صانع الخريطة
+    string perf_cost = 3;                  // تكلفة الأداء
+    uint64 update_time = 4;                // وقت آخر تحديث
+    string resource_statistics = 5;        // إحصائيات الموارد
+    string author_name = 6;                // اسم صانع الخريطة
+    string workshop_desc = 7;              // وصف الخريطة
+    uint32 game_mode = 8;                  // وضع اللعبة
+    repeated uint32 tags = 9;              // الوسوم
+    string mode_settings = 10;             // إعدادات الوضع
+    uint32 team_count = 11;                // عدد الفرق
+    string mini_map_settings = 12;         // إعدادات الخريطة المصغرة
+    string mini_map_object_settings = 13;  // إعدادات كائنات الخريطة المصغرة
+    uint32 map_id = 14;                    // معرف الخريطة
+    uint64 create_time = 15;               // وقت الإنشاء
+    map<string, string> comment_info = 16; // معلومات التعليقات
+    uint32 mode_template_id = 17;          // معرف قالب الوضع
+    uint32 ob_version = 18;                // إصدار OB
+    string matchmaking_rule = 19;          // قواعد المطابقة
+}
+
+// معلومات حساب Craftland
+message CraftlandAccountInfo {
+    uint32 exp = 1;                        // خبرة Craftland
+    uint32 create_times = 2;               // عدد مرات الإنشاء
+    uint32 author_tag = 3;                 // علامة الصانع
+    uint32 like_count = 4;                 // عدد الإعجابات
+    uint32 play_count = 5;                 // عدد مرات اللعب
+}
+
+// طلب معلومات Craftland للاعب
+message CraftlandProfileReq {
+    uint64 account_id = 1;                 // معرف اللاعب
+}
+
+// رد معلومات Craftland للاعب
+message CraftlandProfileRes {
+    repeated CraftlandSlotInfo author_slots_info = 1;  // قائمة فتحات الخرائط
+    CraftlandAccountInfo account_info = 2;             // معلومات حساب Craftland
+    string author_id = 3;                              // معرف الصانع
+}

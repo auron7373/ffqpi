@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package workshop;
+
+// الرسالة الرئيسية لـ GetWorkshopAuthorInfo
+message WorkshopAuthorInfo {
+    // الخرائط المنشورة (field 1) - كل خريطة هي string
+    repeated string maps = 1;
+    
+    // المعلومات الأساسية (field 3) - هذه تحتوي على بيانات أخرى مشفرة
+    bytes basic_info = 3;
+    
+    // UID (field 4)
+    uint64 uid = 4;
+}
+
+// المعلومات الأساسية المفصلة (توجد داخل basic_info)
+message AuthorBasicInfo {
+    uint64 author_id = 1;           // معرف الصانع
+    string author_name = 2;          // اسم الصانع
+    uint32 avatar_id = 3;            // معرف الصورة الرمزية
+    uint32 banner_id = 4;            // معرف الراية
+    uint32 designs_count = 5;        // عدد التصاميم
+    uint64 likes_count = 6;          // عدد الإعجابات
+    uint64 subscriptions_count = 7;  // عدد المشتركين
+    uint32 rank = 8;                 // الترتيب
+    uint64 total_plays = 9;          // إجمالي عدد مرات اللعب
+    uint64 total_likes = 10;         // إجمالي الإعجابات
+    uint32 total_maps = 11;          // إجمالي عدد الخرائط
+}
+
+// معلومات الخريطة المفصلة
+message MapInfo {
+    string map_code = 1;             // رمز الخريطة
+    string map_name = 2;             // اسم الخريطة
+    uint32 map_type = 3;             // نوع الخريطة
+    uint64 plays = 4;                // عدد مرات اللعب
+    uint64 likes = 5;                // عدد الإعجابات
+    uint32 game_mode = 6;            // وضع اللعبة
+    uint64 create_time = 7;          // وقت الإنشاء
+    uint64 update_time = 8;          // وقت التحديث
+    string description = 9;          // وصف الخريطة
+    repeated uint32 tags = 10;       // الوسوم
+}
